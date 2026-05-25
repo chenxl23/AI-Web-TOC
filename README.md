@@ -1,64 +1,48 @@
-# Gemini Web TOC Userscript
+# Omni AI Web TOC (All-in-One)
 
-[English](#english) | [中文](#中文)
+A lightweight, secure Tampermonkey user script that injects a clean, dynamic navigation sidebar into **Google Gemini**, **Anthropic Claude**, and **OpenAI ChatGPT**. It automatically extracts your prompts and allows smooth jumping between long chat threads.
 
----
+[简体中文](#简体中文)
 
-<h2 id="english">English</h2>
+## Features
 
-A lightweight Tampermonkey userscript that adds an interactive, floating Table of Contents (TOC) to the [Google Gemini](https://gemini.google.com/) web interface. When your conversations get long, this handy side panel lets you quickly navigate, search, and jump to specific prompts you've made.
+- **Multi-Platform Adapter:** Seamlessly supports Gemini, Claude, and ChatGPT with zero configuration—automatically loading corresponding query selectors based on the domain.
+- **Pure Prompt Extraction:** Intelligently ignores massive AI text walls and lists only your user questions in a clean timeline outline.
+- **Anti-CSP & Trusted Types Compliant:** Google and OpenAI implement strict Content Security Policies. This script completely abandons `innerHTML` and uses pure, safe raw DOM manipulation methods (`createElement`, `textContent`) to bypass any blocking or quiet crashes.
+- **SPA Heartbeat Guard:** Modern AI platforms rely heavily on Single Page Application (SPA) re-rendering. A background heartbeat check loop auto-injects and heals the floating button within a second if wiped out by framework router transitions.
+- **Data De-duplication & Text Cleaning:** Strips hidden accessibility metadata prefixes (like `"You said "` or `"你说 "`) and flattens code blocks or multiline text to keep the sidebar compact.
 
-### Features
+## Installation
 
-- **Floating UI**: A discreet bookmark icon (📑) stays in the bottom right corner of your screen.
-- **Slide-out Panel**: Clicking the icon reveals a beautifully styled, dark-mode TOC panel listing all your prompts.
-- **Smooth Scrolling**: Click any item in the list, and the page will smoothly scroll down (or up) right to that specific message.
-- **Auto-Detection**: Works flawlessly with Gemini's Single Page Application (SPA) architecture. The TOC updates automatically as you chat or switch between history threads.
-- **Safe & Secure**: Does not use `innerHTML` for rendering the list, ensuring it's completely safe from XSS.
-
-### Installation
-
-1. Install the [Tampermonkey](https://www.tampermonkey.net/) extension for your browser (Chrome, Edge, Firefox, etc.).
-2. Click on the Tampermonkey icon in your browser and select **"Create a new script..."**.
-3. Clear any default code in the editor.
-4. Copy the entire contents of [`gemini-web-toc.user.js`](./gemini-web-toc.user.js) from this repository.
-5. Paste it into the Tampermonkey editor and press `Ctrl+S` (or `Cmd+S`) to save.
-
-### Usage
-
-1. Open [Google Gemini](https://gemini.google.com/).
-2. You will see a blue 📑 button in the bottom right corner.
-3. Chat as usual. When you want to find a previous prompt, click the button to open the TOC panel.
-4. Click on any prompt in the list to jump straight to it.
+1. Install the [Tampermonkey](https://www.tampermonkey.net/) extension for your web browser.
+2. Click the extension icon and select **Create a new script**.
+3. Copy the entire content of `ai-toc-omni.user.js` and paste it into the script editor.
+4. Press `Ctrl + S` (`Cmd + S` on macOS) to save.
+5. Open or refresh Gemini, Claude, or ChatGPT. A floating document icon `📑` will appear at the bottom-right corner.
 
 ---
 
-<h2 id="中文">中文</h2>
+## 简体中文
 
-这是一个轻量级的 Tampermonkey（油猴）用户脚本，专为 [Google Gemini 网页版](https://gemini.google.com/) 打造。它会在页面右下角添加一个悬浮的交互式对话目录 (TOC)。当你的聊天记录变得非常长时，通过这个侧边栏，你可以快速浏览并跳转到你之前提问的任何位置。
+# 全平台 AI 对话目录扩展 (Omni AI Web TOC)
 
-### 功能特点
+一款轻量级、超安全的 Tampermonkey（篡改猴）用户脚本。支持一键在 **Google Gemini**、**Anthropic Claude** 和 **OpenAI ChatGPT** 网页端注入动态侧边导航栏。它会自动解析庞大的对话流，精准提取用户的 Prompt 提问大纲并支持平滑滚动跳转。
 
-- **悬浮界面**：屏幕右下角常驻一个低调的书签图标 (📑)。
-- **丝滑侧边栏**：点击图标，会滑出一个美观的深色模式目录面板，按顺序排列你所有的历史提问。
-- **平滑跳转**：在目录中点击任意问题，网页就会像坐电梯一样，平滑滚动定位到那句话的位置，并高亮提示。
-- **动态自适应**：完美兼容 Gemini 的单页应用 (SPA) 架构，无论你是继续聊天还是切换左侧的历史对话，目录都会自动更新。
-- **安全可靠**：代码完全摒弃了 `innerHTML` 的暴力渲染，采用原生 DOM API 构建元素，彻底杜绝 XSS 风险，符合最严格的安全策略。
+## 功能特性
 
-### 安装方法
+- **三合一动态适配：** 无需任何繁琐配置，单个脚本完美包揽三大主流 AI 平台。根据当前域名自动切换最契合的底层 DOM 选择器。
+- **Prompt 精准大纲：** 智能过滤 AI 动辄上千字的繁杂回复，只提取用户本身发送的原始提问，生成极为干净的对话目录。
+- **天然免免疫 CSP 拦截：** 针对各大平台极为严苛的**内容安全策略（CSP）**与 **Trusted Types（可信类型）**审计，脚本底层彻底舍弃 `innerHTML` 污染，全流程改用纯净 DOM 节点挂载，不引发任何静默报错。
+- **SPA 级别强效防刷：** 针对现代大模型网页高频局部刷新的 SPA（单页面应用）特性，采用秒级心跳检测，即便 UI 按钮被网页路由彻底抹除，也能自适应秒级无感补回。
+- **深度净化与去重：** 自动抹除 Gemini 底层为屏幕阅读器准备的隐藏 `"你说 "` 或 `"You said "` 前缀；同时对 ChatGPT 复杂的多行文本及代码块进行平滑压平处理，防止目录崩塌。
 
-1. 为你的浏览器（Chrome、Edge 等）安装 [Tampermonkey](https://www.tampermonkey.net/)（油猴）扩展插件。
-2. 点击浏览器右上角的油猴图标，选择 **“添加新脚本...”**。
-3. 清空编辑器里自带的默认代码。
-4. 复制本仓库中 [`gemini-web-toc.user.js`](./gemini-web-toc.user.js) 文件的所有代码。
-5. 粘贴到油猴编辑器中，按下 `Ctrl+S` 保存即可。
+## 安装指南
 
-### 使用方法
+1. 确保您的浏览器已下载 [Tampermonkey (篡改猴)](https://www.tampermonkey.net/) 插件。
+2. 点击扩展程序图标，选择 **“添加新脚本”**。
+3. 清空编辑器，将本仓库中 `ai-toc-omni.user.js` 的全部内容粘贴进去并保存 (`Ctrl + S`)。
+4. 刷新大模型网页，右下角即会常驻一个蓝色的 `📑` 悬浮图标，点击即可开启高效导航。
 
-1. 打开 [Google Gemini 网页版](https://gemini.google.com/)。
-2. 页面右下角会出现一个蓝色的 📑 悬浮按钮。
-3. 正常进行对话，当你想找之前的问题时，点击按钮展开面板。
-4. 在目录列表中点击任意问题，即可瞬间跳转过去！
+## 开源协议
 
-### 开源协议 (License)
-MIT
+本项目采用 [MIT License](LICENSE) 开源协议。
